@@ -1,0 +1,105 @@
+.App {
+  position: absolute;
+  height: 400px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  font-family: "Inter", sans-serif;
+}
+
+select {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border: 1px solid #11103c;
+  border-radius: 4px;
+  overflow-y: hidden;
+}
+
+option {
+  padding: 9px 11px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  line-height: 150%;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.toggle-selected-list {
+  position: absolute;
+  right: 10px;
+  width: 12px;
+  height: 12px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  background: url(./assets/images/Icon.png) no-repeat center;
+}
+
+.close {
+  background: url(./assets/images/close-btn.png) no-repeat center;
+}
+
+#selected-list {
+  padding: 5px;
+  margin: 0;
+  width: 100%;
+  padding: 12px;
+  padding-left: 0;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+#selected-list[placeholder] {
+  font-size: 16px;
+  color: #11103c;
+}
+
+.skill-list {
+  display: flex;
+  width: auto;
+  gap: 8px;
+  flex-direction: row;
+  list-style-type: none;
+  padding: 12px;
+  margin: 0;
+}
+
+.delete-skill {
+  width: 12px;
+  height: 12px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  background: url(./assets/images/del-skill.png) no-repeat center;
+}
+
+.skill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  padding: 2px 2px 2px 4px;
+  background-color: #edeffb;
+  font-size: 12px;
+  line-height: 150%;
+  font-weight: 500;
+}
+
+.skills-row {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  border-radius: 4px;
+  border: 1px solid #11103c;
+  background: #fff;
+}
