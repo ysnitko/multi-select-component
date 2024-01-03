@@ -1,10 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { options } from "./constants";
-import "./App.css";
+import React, { useEffect, useState } from 'react';
+// import { options } from './constants';
+import './App.css';
 
 function App() {
   const [opened, setOpened] = useState(false);
   const [skill, setSkill] = useState([]);
+  const [options, setOptions] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      'https://api.stackexchange.com/2.3/tags?order=desc&sort=popular&site=stackoverflow',
+      {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setOptions(data.items));
+  }, [options]);
 
   const deleteAllSkills = () => {
     setSkill([]);
@@ -57,7 +73,7 @@ function App() {
           />
           <button
             className={
-              opened ? "toggle-selected-list close" : "toggle-selected-list"
+              opened ? 'toggle-selected-list close' : 'toggle-selected-list'
             }
             onClick={toggleMenu}
           ></button>
@@ -68,8 +84,8 @@ function App() {
         <select size={5} onChange={addSkill}>
           {options.map((item, index) => {
             return (
-              <option key={index} value={item.value}>
-                {item.value}
+              <option key={index} value={item}>
+                {item}
               </option>
             );
           })}
