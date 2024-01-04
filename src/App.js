@@ -1,29 +1,30 @@
-import React, { useEffect, useState } from 'react';
-// import { options } from './constants';
+import React, { useRef, useState } from 'react';
+import { options } from './constants';
 import './App.css';
 
 function App() {
   const [opened, setOpened] = useState(false);
   const [skill, setSkill] = useState([]);
-  const [options, setOptions] = useState([]);
+  const [filteredList, setFilteredList] = useState(options);
 
-  useEffect(() => {
-    fetch(
-      'https://api.stackexchange.com/2.3/tags?order=desc&sort=popular&site=stackoverflow',
-      {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => setOptions(data.items));
-  }, [options]);
+  const inputRef = useRef('');
+
+  const filterSkills = () => {
+    const filtered = options.filter((item) =>
+      item.value.toLowerCase().includes(inputRef.current.value.toLowerCase())
+    );
+    setOpened(true);
+    setFilteredList(filtered);
+    if (inputRef === '') {
+      setFilteredList(options);
+      setOpened(false);
+    }
+  };
 
   const deleteAllSkills = () => {
     setSkill([]);
+    setFilteredList(options);
+    inputRef.current.value = '';
   };
 
   const toggleMenu = () => {
@@ -35,12 +36,14 @@ function App() {
 
   const addSkill = (event) => {
     const values = event.target.value;
+    console.log(event.target.id);
     for (let index = 0; index < skill.length; index++) {
       const element = skill[index];
       if (element.value === values || skill.length > 4) {
         return;
       }
     }
+
     setSkill([...skill, { value: event.target.value }]);
   };
 
@@ -70,6 +73,8 @@ function App() {
             id="selected-list"
             type="text"
             placeholder="Add upto 5 skills"
+            ref={inputRef}
+            onInput={filterSkills}
           />
           <button
             className={
@@ -79,13 +84,12 @@ function App() {
           ></button>
         </label>
       </div>
-
       {opened && (
-        <select size={5} onChange={addSkill}>
-          {options.map((item, index) => {
+        <select size={filteredList.length} onClick={addSkill}>
+          {filteredList.map((item, index) => {
             return (
-              <option key={index} value={item}>
-                {item}
+              <option key={index} value={item.value}>
+                {item.value}
               </option>
             );
           })}

@@ -19,4 +19,16 @@ export const options = [
     id: 5,
     value: "ReactJS",
   },
+  {
+    id: 6,
+    value: "Vue",
+  },
+  {
+    id: 7,
+    value: "Python",
+  },
+  {
+    id: 8,
+    value: "Java",
+  },
 ];

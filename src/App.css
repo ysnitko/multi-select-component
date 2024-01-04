@@ -26,6 +26,10 @@ option {
   line-height: 150%;
 }
 
+option:checked {
+  background-color: #edeffb;
+}
+
 label {
   display: flex;
   align-items: center;
